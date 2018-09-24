@@ -21,7 +21,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -269,3 +268,7 @@ __pycache__/
 1.Presentation/Allies/Scripts/modules/pymes/customer/customer-form.js.orig
 1.Presentation/Allies/Areas/Pymes/Views/CompanyLead/Index.cshtml.orig
 PrecompiledWeb
+
+
+# Ignore Fronted files
+*\.vscode/
