@@ -11,6 +11,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="SimpleInjector" Version="4.3.0" />
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\3.Application\Application\Application.csproj" />
+    <ProjectReference Include="..\..\4.Domain\Domain.Common\Domain.Common.csproj" />
+    <ProjectReference Include="..\..\5.DataAccess\CrossCutting.IoC\CrossCutting.IoC.csproj" />
   </ItemGroup>
 
 </Project>
