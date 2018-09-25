@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "34923231105",
+    "firebase_url": "https://restaurall-poli.firebaseio.com",
+    "project_id": "restaurall-poli",
+    "storage_bucket": "restaurall-poli.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34923231105:android:e7eba19587d2bb0a",
+        "android_client_info": {
+          "package_name": "com.restaurall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34923231105-01nqlnnhh7rr1i8j21helrjdcqci8mqi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjM9pfch9THQCCYsQDq4-zvcW8lcJRE7w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

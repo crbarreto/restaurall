@@ -8,7 +8,6 @@ import React, { Component } from 'react';
 import { DrawerItems, SafeAreaView } from 'react-navigation';
 import { StyleSheet, Text, ScrollView, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import firebase from 'react-native-firebase';
 const firebaseAuth = firebase.auth();
@@ -38,7 +37,7 @@ type Props = {
     labelStyle: any
 };
 
-class NavigationMenu extends Component<Props, State> {
+class NavigationMenuComponent extends Component<Props, State> {
     constructor(props) {
         super(props);
 
@@ -113,16 +112,6 @@ class NavigationMenu extends Component<Props, State> {
         }
     }
 
-    renderMenuItems() {
-        const { items } = this.props;
-        const { role } = this.props.user.data;
-
-        if (role === 'CUSTOMER')
-            return items.filter(item => !CUSTOMER_HIDDEN_ROUTES.includes(item.routeName));
-        else
-            return items;
-    }
-
     componentWillMount() {
         // Create an interval for get the user info
         let result = false;
@@ -139,28 +128,26 @@ class NavigationMenu extends Component<Props, State> {
     render() {
 
         const { displayName, email, photoURL, role } = this.props.user.data;
-        const menuItems = this.renderMenuItems();
 
         return (
             <ScrollView>
                 <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
 
-                    <LinearGradient colors={COLORS.gradientWhite} style={styles.linearGradient}>
-
+                    <View style={styles.infoContainer}>
                         <TouchableOpacity onPress={this._handleProfile}>
                             <Image source={photoURL && photoURL !== 'https://none' ? { uri: photoURL } : userDefaultIcon} style={styles.userImage} />
-                            <BoldText style={styles.userName}>{displayName || ''}</BoldText>
-                            <RegularText style={styles.userMail}>{email || ''}</RegularText>
+                            <BoldText style={styles.userName}>{displayName || 'Nombre de usuario'}</BoldText>
+                            <RegularText style={styles.userMail}>{email || 'Correo'}</RegularText>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.exit} onPress={this._handleExit}>
                             <Icon name="exit-to-app" size={24} color={COLORS.main} />
                         </TouchableOpacity>
-                    </LinearGradient>
+                    </View>
 
                     <DrawerItems
                         {...this.props}
-                        items={menuItems}
+                        items={this.props.items}
                         itemStyle={styles.item}
                         labelStyle={styles.itemLabel}
                         activeTintColor={COLORS.main}
@@ -177,17 +164,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    infoContainer: {
+        flex: 1,
+        paddingVertical: '4%',
+        paddingHorizontal: '5%',
+    },
     item: {
         marginVertical: 0
     },
     itemLabel: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 20
-    },
-    linearGradient: {
-        flex: 1,
-        paddingVertical: '4%',
-        paddingHorizontal: '5%',
     },
     userImage: {
         borderRadius: 50,
@@ -216,5 +203,4 @@ function mapStateToProps(state) {
     };
 }
 
-const BCNavigationMenu = connect(mapStateToProps)(NavigationMenu);
-export default BCNavigationMenu
+export const NavigationMenu = connect(mapStateToProps)(NavigationMenuComponent);

@@ -13,13 +13,12 @@ import {
   Text,
   View,
 } from 'react-native';
-import * as Animated from 'react-native-animatable';
 import SplashScreen from 'react-native-splash-screen';
 
 
 // Components
-import { MonoText, BoldText, RegularText, LightText } from '../components/StyledText';
-import { BCHeader } from '../components/BCHeader';
+import { BoldText, RegularText, LightText } from '../components/StyledText';
+import { Header } from '../components/Components';
 
 // Constants
 import COLORS from '../constants/Colors';
@@ -37,31 +36,27 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Header navigation={this.props.navigation} />
 
-        <BCHeader navigation={this.props.navigation} />
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-          <View style={styles.welcomeContainer}>
-            <RegularText style={styles.mainText}>
-              Bienvenido
+        <View style={styles.welcomeContainer}>
+          <RegularText style={styles.mainText}>
+            Bienvenido
             <BoldText style={styles.mainText}> Cristian Barreto</BoldText>
-              , aquí el estado de su cuenta:
-            </RegularText>
-          </View>
+          </RegularText>
+        </View>
 
-        </ScrollView>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff'
   },
   contentContainer: {
+    flex: 1,
     paddingVertical: '4%',
   },
   welcomeContainer: {

@@ -5,7 +5,7 @@
 
 // Node modules
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Spinner from 'react-native-spinkit';
 import { Modal, Portal, Text } from 'react-native-paper';
 
@@ -19,7 +19,7 @@ type Props = {
     spinner?: string,
     visible?: boolean
 }
-export class BCSpinner extends Component<Props> {
+export class CustomSpinner extends Component<Props> {
     constructor(props) {
         super(props);
         this.open = this.open.bind(this);

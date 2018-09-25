@@ -14,7 +14,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 
 // Navigator menu
-import NavigationMenu from '../components/NavigationMenu';
+import { NavigationMenu } from '../components/Components';
 
 // Navigators
 const Auth = StackNavigator({ Login: LoginScreen });
@@ -24,7 +24,7 @@ const App = DrawerNavigator(
         Home: HomeScreen,
     },
     // Navigator Menu
-    { contentComponent: BCNavigationMenu }
+    { contentComponent: NavigationMenu }
 );
 
 const RootNavigator = SwitchNavigator(

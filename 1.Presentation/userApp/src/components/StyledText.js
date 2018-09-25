@@ -21,10 +21,3 @@ export class BoldText extends Component {
     return <Text {...this.props} style={[this.props.style, { fontFamily: 'Rajdhani-Bold' }]} />
   }
 }
-
-// Monospace
-export class MonoText extends Component {
-  render() {
-    return <Text {...this.props} style={[this.props.style, { fontFamily: 'SpaceMono-Regular' }]} />;
-  }
-}

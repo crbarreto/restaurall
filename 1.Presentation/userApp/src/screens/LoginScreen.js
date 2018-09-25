@@ -16,21 +16,22 @@ import {
   ToastAndroid
 } from 'react-native';
 import { connect } from 'react-redux';
-import { TextField } from 'react-native-material-textfield';
+import { TextInput } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from 'react-native-firebase'; // Import Firebase for auth
+import { Button } from 'react-native-paper';
 
 // Create a firebase Auth const
 const firebaseAuth = firebase.auth();
 
 // Assets
 import COLORS from '../constants/Colors';
-const banconfioLogo = require('../assets/images/logo.png');
+const logoImage = require('../assets/images/logo.png');
 
 // Components
-import { BCButton } from '../components/BCComponents';
+import { CustomButton } from '../components/Components';
 import { LightText, RegularText, BoldText } from '../components/StyledText';
 
 // Validator
@@ -192,106 +193,103 @@ class LoginScreen extends React.Component<Props, State> {
     let formValid = userMailValid && userPasswordValid;
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-          <View style={styles.logoContainer}>
-            <RegularText style={styles.titleText}>RestaurAll</RegularText>
-            <Image source={banconfioLogo} alt="Logo Banconfio" style={styles.logoImage} />
-            <RegularText style={styles.blueText}>Pedir tu comida no podría se más fácil</RegularText>
-          </View>
+        <View style={styles.logoContainer}>
+          <RegularText style={styles.titleText}>RestaurAll</RegularText>
+          <Image source={logoImage} alt="Logo Banconfio" style={styles.logoImage} />
+          <RegularText style={styles.blueText}>Pedir tu comida no podría se más fácil</RegularText>
+        </View>
 
-          <View style={styles.formContainer}>
+        <View style={styles.formContainer}>
 
-            {
-              // Render only if the user don't remember the password
-              userForgotPassword ?
-                <Animatable.View ref={this.handleViewRef}>
-                  <RegularText style={styles.regularText}>
-                    Podemos ayudarle a recuperar su contraseña, escriba el correo electronico asociado a su cuenta:
+          {
+            // Render only if the user don't remember the password
+            userForgotPassword ?
+              <Animatable.View ref={this.handleViewRef}>
+                <RegularText style={styles.regularText}>
+                  Podemos ayudarle a recuperar su contraseña, escriba el correo electronico asociado a su cuenta:
               </RegularText>
-                </Animatable.View>
+              </Animatable.View>
+              :
+              null
+          }
+
+          <TextInput
+            label='Correo'
+            value={userMail}
+            style={styles.regularText}
+            error={!this.state.userMailValid ? 'Ingrese un correo valido' : ''}
+            onChangeText={this._handleChangeUserMail}
+          />
+
+          {
+            // Render only if the user remember the password
+            !userForgotPassword ?
+              <Animatable.View ref={this.handleViewRef}>
+                <TextInput
+                  label='Contraseña'
+                  style={styles.regularText}
+                  error={!this.state.userPasswordValid ? 'La contraseña no puede ser tan corta' : ''}
+                  value={userPassword}
+                  secureTextEntry
+                  onChangeText={this._handleChangeUserPassword}
+                />
+              </Animatable.View>
+              :
+              null
+          }
+
+          <RegularText style={styles.forgotText} onPress={this._handleForgotPassword} >
+            {
+              userForgotPassword ?
+                'Tengo una cuenta'
                 :
-                null
+                'Olvidé mi contraseña'
             }
+          </RegularText>
 
-            <TextField
-              label='Correo'
-              value={userMail}
-              style={styles.regularText}
-              labelTextStyle={styles.regularText}
-              error={!this.state.userMailValid ? 'Ingrese un correo valido' : ''}
-              onChangeText={this._handleChangeUserMail}
-            />
-
-            {
-              // Render only if the user remember the password
-              !userForgotPassword ?
-                <Animatable.View ref={this.handleViewRef}>
-                  <TextField
-                    label='Contraseña'
-                    style={styles.regularText}
-                    labelTextStyle={styles.regularText}
-                    error={!this.state.userPasswordValid ? 'La contraseña no puede ser tan corta' : ''}
-                    value={userPassword}
-                    secureTextEntry
-                    onChangeText={this._handleChangeUserPassword}
-                  />
-                </Animatable.View>
-                :
-                null
-            }
-
-            <RegularText style={styles.forgotText} onPress={this._handleForgotPassword} >
-              {
-                userForgotPassword ?
-                  'Tengo una cuenta'
-                  :
-                  'Olvidé mi contraseña'
-              }
-            </RegularText>
-
-            {
-              userResetPassword ?
-                <Animatable.View animation="slideInUp" style={{ marginVertical: '3%' }}>
-                  <RegularText style={{ color: COLORS.mainGray, fontSize: 16 }}>
-                    <Icon name="email" size={16} color={COLORS.mainGray} />
-                    {` - `}Mensaje enviado, revisa tu correo electronico para restablecer la contraseña
+          {
+            userResetPassword ?
+              <Animatable.View animation="slideInUp" style={{ marginVertical: '3%' }}>
+                <RegularText style={{ color: COLORS.mainGray, fontSize: 16 }}>
+                  <Icon name="email" size={16} color={COLORS.mainGray} />
+                  {` - `}Mensaje enviado, revisa tu correo electronico para restablecer la contraseña
                   </RegularText>
-                </Animatable.View>
-                : null
-            }
+              </Animatable.View>
+              : null
+          }
 
-            {
-              errorOcurred ?
-                <Animatable.View animation="slideInUp" style={{ marginVertical: '3%' }}>
-                  <RegularText style={{ color: COLORS.secondary, fontSize: 16, textAlign: 'center' }}>
-                    <Icon name="alert" size={16} color={COLORS.secondary} />
-                    {` - ${errorMessage}`}
-                  </RegularText>
-                </Animatable.View>
-                : null
-            }
+          {
+            errorOcurred ?
+              <Animatable.View animation="slideInUp" style={{ marginVertical: '3%' }}>
+                <RegularText style={{ color: COLORS.secondary, fontSize: 16, textAlign: 'center' }}>
+                  <Icon name="alert" size={16} color={COLORS.secondary} />
+                  {` - ${errorMessage}`}
+                </RegularText>
+              </Animatable.View>
+              : null
+          }
 
-          </View>
+        </View>
 
-          <View>
-            <BCButton
-              title={userForgotPassword ? 'Recupera Contraseña' : 'Entrar'}
-              onPress={this._handleLogin}
-              disabled={userForgotPassword ? !userMailValid : !formValid} />
+        <View>
+          <CustomButton
+            title={userForgotPassword ? 'Recupera Contraseña' : 'Entrar'}
+            onPress={this._handleLogin}
+            disabled={userForgotPassword ? !userMailValid : !formValid} />
 
-            <RegularText style={styles.infoText}>
-              ¿ Aún no tiene una cuenta ?
+
+          <RegularText style={styles.infoText}>
+            ¿ Aún no tiene una cuenta ?
             <Text style={{ fontWeight: 'bold' }} onPress={() => Linking.openURL('https://restaurall.com')}>
-                {` INFORMACIÓN`}
-              </Text>
-            </RegularText>
+              {` INFORMACIÓN`}
+            </Text>
+          </RegularText>
 
-          </View>
+        </View>
 
-        </ScrollView>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -299,10 +297,10 @@ class LoginScreen extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.mainLightGray,
-    flex: 1,
   },
   contentContainer: {
-    paddingBottom: '2%',
+    flex: 1,
+    paddingVertical: '2%',
   },
   titleText: {
     color: COLORS.main,
