@@ -6,14 +6,13 @@
 // Node modules
 import React from 'react';
 import {
-  ScrollView,
   StyleSheet,
   Text,
   View,
   Image,
   Linking,
   Clipboard,
-  ToastAndroid
+  ToastAndroid,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { TextInput } from 'react-native-paper';
@@ -22,6 +21,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from 'react-native-firebase'; // Import Firebase for auth
 import { Button } from 'react-native-paper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Create a firebase Auth const
 const firebaseAuth = firebase.auth();
@@ -193,7 +193,12 @@ class LoginScreen extends React.Component<Props, State> {
     let formValid = userMailValid && userPasswordValid;
 
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <KeyboardAwareScrollView
+        style={styles.container}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={styles.contentContainer}
+        scrollEnabled={true}
+      >
 
         <View style={styles.logoContainer}>
           <RegularText style={styles.titleText}>RestaurAll</RegularText>
@@ -207,7 +212,7 @@ class LoginScreen extends React.Component<Props, State> {
             // Render only if the user don't remember the password
             userForgotPassword ?
               <Animatable.View ref={this.handleViewRef}>
-                <RegularText style={styles.regularText}>
+                <RegularText style={{ marginVertical: '2%' }}>
                   Podemos ayudarle a recuperar su contraseña, escriba el correo electronico asociado a su cuenta:
               </RegularText>
               </Animatable.View>
@@ -216,9 +221,9 @@ class LoginScreen extends React.Component<Props, State> {
           }
 
           <TextInput
+            style={{ marginBottom: '2%' }}
             label='Correo'
             value={userMail}
-            style={styles.regularText}
             error={!this.state.userMailValid ? 'Ingrese un correo valido' : ''}
             onChangeText={this._handleChangeUserMail}
           />
@@ -229,7 +234,6 @@ class LoginScreen extends React.Component<Props, State> {
               <Animatable.View ref={this.handleViewRef}>
                 <TextInput
                   label='Contraseña'
-                  style={styles.regularText}
                   error={!this.state.userPasswordValid ? 'La contraseña no puede ser tan corta' : ''}
                   value={userPassword}
                   secureTextEntry
@@ -273,12 +277,12 @@ class LoginScreen extends React.Component<Props, State> {
 
         </View>
 
-        <View>
-          <CustomButton
-            title={userForgotPassword ? 'Recupera Contraseña' : 'Entrar'}
-            onPress={this._handleLogin}
-            disabled={userForgotPassword ? !userMailValid : !formValid} />
-
+        <View style={{ marginHorizontal: '10%', width: '80%' }}>
+          <Button
+            mode="contained"
+            onPress={this._handleLogin} >
+            {userForgotPassword ? 'Recupera Contraseña' : 'Entrar'}
+          </Button>
 
           <RegularText style={styles.infoText}>
             ¿ Aún no tiene una cuenta ?
@@ -286,44 +290,43 @@ class LoginScreen extends React.Component<Props, State> {
               {` INFORMACIÓN`}
             </Text>
           </RegularText>
-
         </View>
 
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.mainLightGray,
+    backgroundColor: COLORS.mainRed,
   },
   contentContainer: {
     flex: 1,
-    paddingVertical: '2%',
+    paddingBottom: '2%',
   },
   titleText: {
     color: COLORS.main,
     fontSize: 35,
   },
-  regularText: {
-    fontFamily: 'Rajdhani-Regular'
-  },
   forgotText: {
-    color: COLORS.main,
+    color: COLORS.secondary,
     textAlign: 'right',
+    fontSize: 16,
     marginTop: '2%'
   },
   blueText: {
-    color: COLORS.main,
+    color: COLORS.secondary,
+    fontSize: 16,
   },
   infoText: {
+    color: COLORS.main,
     marginTop: '4%',
     textAlign: 'center'
   },
   logoContainer: {
     alignItems: 'center',
-    backgroundColor: COLORS.mainWhite,
+    backgroundColor: COLORS.tertiary,
     paddingBottom: '8%',
     paddingTop: '8%',
     width: '100%'
@@ -335,12 +338,10 @@ const styles = StyleSheet.create({
     width: 140,
   },
   formContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.mainWhite,
     marginBottom: '4%',
-    paddingBottom: '4%',
-    paddingLeft: '10%',
-    paddingRight: '10%',
-    paddingTop: '2%',
+    paddingHorizontal: '10%',
+    paddingVertical: '2%',
     width: '100%'
   }
 });

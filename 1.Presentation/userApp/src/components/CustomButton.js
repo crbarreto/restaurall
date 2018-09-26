@@ -24,7 +24,7 @@ export class CustomButton extends Component<Props, State> {
 
         return (
 
-            <Button {...this.props} onPress={onPress} color={COLORS.main}>
+            <Button {...this.props} onPress={onPress}>
                 <Text style={buttonStyle.text}>{title}</Text>
             </Button>
         );

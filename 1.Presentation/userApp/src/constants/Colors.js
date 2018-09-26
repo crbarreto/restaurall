@@ -1,13 +1,12 @@
 const COLORS = {
-    main: '#BE1726',
-    secondary: '#E94224',
-    tertiary: '#6F0610',
+    main: '#264653',
+    secondary: '#2a9d8f',
+    tertiary: '#e9c46a',
     mainGray: '#D3D2D3',
     mainLightGray: '#E5E5E5',
     mainDark: '#4C4C4C',
-    mainWhite: '#fffddd',
-    gradientWhite: ['#fffddd', '#FFFEF6', '#F8F6FF'],
-    gradientInvertWhite: ['#F8F6FF', '#FFFEF6', '#fffddd']
+    mainWhite: '#e9c46a',
+    mainRed: '#e76f51',
 };
 
 export default COLORS;

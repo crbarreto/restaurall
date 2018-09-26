@@ -6,15 +6,13 @@
 // Node modules
 import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-
+import MapView from 'react-native-maps';
+import { Searchbar } from 'react-native-paper';
 
 // Components
 import { BoldText, RegularText, LightText } from '../components/StyledText';
@@ -23,11 +21,24 @@ import { Header } from '../components/Components';
 // Constants
 import COLORS from '../constants/Colors';
 
-export default class HomeScreen extends Component {
+type Props = {};
+type State = {
+  searchAddress: String
+};
+
+export default class HomeScreen extends React.Component<Props, State> {
   static navigationOptions = {
     drawerLabel: 'Pantalla principal',
     drawerIcon: 'home'
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchAddress: '',
+    };
+  }
 
   componentDidMount() {
     // Hide SplashScreen
@@ -35,37 +46,43 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Header navigation={this.props.navigation} />
 
-        <View style={styles.welcomeContainer}>
-          <RegularText style={styles.mainText}>
-            Bienvenido
-            <BoldText style={styles.mainText}> Cristian Barreto</BoldText>
-          </RegularText>
+    const { searchAddress } = this.state;
+
+    return (
+      <View style={styles.container}>
+        <View style={{ zIndex: 2 }}>
+          <Header navigation={this.props.navigation} />
+
+          <Searchbar
+            placeholder="Search"
+            onChangeText={query => { this.setState({ searchAddress: query }); }}
+            value={searchAddress}
+          />
+
         </View>
 
-      </ScrollView>
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 4.653203,
+            longitude: -74.061226,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        >
+        </MapView>
+
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff'
-  },
-  contentContainer: {
     flex: 1,
-    paddingVertical: '4%',
   },
-  welcomeContainer: {
-    marginHorizontal: '10%',
-    marginVertical: '2%',
-    width: '80%'
-  },
-  mainText: {
-    color: '#000',
-    fontSize: 20
+  map: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
