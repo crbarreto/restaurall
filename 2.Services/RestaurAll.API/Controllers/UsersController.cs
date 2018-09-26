@@ -1,9 +1,10 @@
-﻿using Application.Interfaces.Definition;
+﻿using System.Threading.Tasks;
+using Application.Interfaces.Definition;
 using Domain.Common.Extensions;
 using Domain.Common.OperationHandling;
 using Domain.Entities.Account;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace RestaurAll.API.Controllers
 {
@@ -21,7 +22,17 @@ namespace RestaurAll.API.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> Get(string id)
     {
-      return await _userApplicationService.Get(x => x.Id == id.GetInternalId()) ?? new User();
+      var objectId = id.GetInternalId();
+
+      if (objectId == ObjectId.Empty)
+        return BadRequest("Invalid ID supplied");
+
+      var response = await _userApplicationService.Get(x => x.Id == objectId);
+
+      if (response == null)
+        return NotFound($"User not found");
+
+      return Ok(response);
     }
 
     [HttpPost]

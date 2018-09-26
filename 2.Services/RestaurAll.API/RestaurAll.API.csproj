@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\3.Application\Application\Application.csproj" />
     <ProjectReference Include="..\..\4.Domain\Domain.Common\Domain.Common.csproj" />
+    <ProjectReference Include="..\..\4.Domain\Domain.Models\Domain.Models.csproj" />
     <ProjectReference Include="..\..\5.DataAccess\CrossCutting.IoC\CrossCutting.IoC.csproj" />
   </ItemGroup>
 
