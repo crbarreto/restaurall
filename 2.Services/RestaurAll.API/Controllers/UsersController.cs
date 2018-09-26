@@ -19,18 +19,13 @@ namespace RestaurAll.API.Controllers
       _userApplicationService = userApplicationService;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<User>> Get(string id)
+    [HttpGet("{uid}")]
+    public async Task<ActionResult<User>> GetByUid(string uid)
     {
-      var objectId = id.GetInternalId();
-
-      if (objectId == ObjectId.Empty)
-        return BadRequest("Invalid ID supplied");
-
-      var response = await _userApplicationService.Get(x => x.Id == objectId);
+      var response = await _userApplicationService.Get(x => x.Uid == uid);
 
       if (response == null)
-        return NotFound($"User not found");
+        return NotFound();
 
       return Ok(response);
     }
@@ -38,8 +33,16 @@ namespace RestaurAll.API.Controllers
     [HttpPost]
     public async Task<ActionResult<OperationResult<User>>> Create([FromBody] User user)
     {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
       var result = await _userApplicationService.Create(user);
-      return result;
+
+      if (!result.Status)
+        return BadRequest(result);
+
+      return Ok();
     }
+
   }
 }
