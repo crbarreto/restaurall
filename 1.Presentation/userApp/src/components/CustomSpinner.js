@@ -10,7 +10,7 @@ import Spinner from 'react-native-spinkit';
 import { Modal, Portal, Text } from 'react-native-paper';
 
 // Components
-import COLORS from '../constants/Colors';
+import { COLORS } from '../constants/Theme';
 import { RegularText } from './StyledText';
 
 type Props = {

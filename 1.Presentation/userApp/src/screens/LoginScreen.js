@@ -27,7 +27,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const firebaseAuth = firebase.auth();
 
 // Assets
-import COLORS from '../constants/Colors';
+import { COLORS } from '../constants/Theme';
 const logoImage = require('../assets/images/logo.png');
 
 // Components
@@ -193,11 +193,8 @@ class LoginScreen extends React.Component<Props, State> {
     let formValid = userMailValid && userPasswordValid;
 
     return (
-      <KeyboardAwareScrollView
+      <View
         style={styles.container}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={styles.contentContainer}
-        scrollEnabled={true}
       >
 
         <View style={styles.logoContainer}>
@@ -292,7 +289,7 @@ class LoginScreen extends React.Component<Props, State> {
           </RegularText>
         </View>
 
-      </KeyboardAwareScrollView>
+      </View>
     );
   }
 }
@@ -300,6 +297,7 @@ class LoginScreen extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.mainRed,
+    ...StyleSheet.absoluteFillObject
   },
   contentContainer: {
     flex: 1,

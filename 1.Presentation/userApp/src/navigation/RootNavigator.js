@@ -1,10 +1,10 @@
-/* 
+/*
   * Navigator
   * @flow
 */
 
 // Node Modules
-import { StackNavigator, DrawerNavigator, SwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 
 // Screens:
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
@@ -17,21 +17,21 @@ import LoginScreen from '../screens/LoginScreen';
 import { NavigationMenu } from '../components/Components';
 
 // Navigators
-const Auth = StackNavigator({ Login: LoginScreen });
-const App = DrawerNavigator(
+const Auth = createStackNavigator({ Login: {screen: LoginScreen} });
+const App = createDrawerNavigator(
     //Screens
     {
-        Home: HomeScreen,
+        Home: {screen: HomeScreen},
     },
     // Navigator Menu
     { contentComponent: NavigationMenu }
 );
 
-const RootNavigator = SwitchNavigator(
+const RootNavigator = createSwitchNavigator(
     {
-        AuthLoading: AuthLoadingScreen,
-        Auth: Auth,
-        App: App,
+        AuthLoading: {screen: AuthLoadingScreen},
+        Auth: {screen: Auth},
+        App: {screen: App},
     },
     {
         initialRouteName: 'AuthLoading',

@@ -13,7 +13,7 @@ import firebase from 'react-native-firebase';
 const firebaseAuth = firebase.auth();
 
 // Constants
-import COLORS from '../constants/Colors';
+import { COLORS } from '../constants/Theme';
 
 // Componenets
 import { RegularText, BoldText } from './StyledText';
@@ -146,12 +146,11 @@ class NavigationMenuComponent extends Component<Props, State> {
                     </View>
 
                     <DrawerItems
-                        {...this.props}
-                        items={this.props.items}
                         itemStyle={styles.item}
                         labelStyle={styles.itemLabel}
                         activeTintColor={COLORS.main}
                         inactiveTintColor="#000"
+                        {...this.props}
                     />
 
                 </SafeAreaView>
@@ -174,7 +173,8 @@ const styles = StyleSheet.create({
     },
     itemLabel: {
         fontFamily: 'Rajdhani-Regular',
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: 'normal'
     },
     userImage: {
         borderRadius: 50,

@@ -8,8 +8,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
-// Assets
-import COLORS from '../constants/Colors';
+// Constants
+import { COLORS } from '../constants/Theme';
 
 type Props = {
     style: any,

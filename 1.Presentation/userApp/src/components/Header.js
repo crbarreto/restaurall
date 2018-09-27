@@ -18,12 +18,12 @@ export class Header extends Component<Props> {
     }
 
     _handlePress() {
-        this.props.navigation.navigate('DrawerToggle');
+        this.props.navigation.openDrawer();
     }
 
     render() {
-        const { 
-            iconColor 
+        const {
+            iconColor
         } = this.props;
 
         return (
