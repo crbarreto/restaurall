@@ -12,16 +12,23 @@ import HomeScreen from '../screens/HomeScreen';
 
 // Login and forgot password screen
 import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 
 // Navigator menu
 import { NavigationMenu } from '../components/Components';
 
 // Navigators
-const Auth = createStackNavigator({ Login: {screen: LoginScreen} });
+const Auth = createStackNavigator(
+    {
+        Login: { screen: LoginScreen },
+        Register: { screen: RegisterScreen },
+    }
+);
+
 const App = createDrawerNavigator(
     //Screens
     {
-        Home: {screen: HomeScreen},
+        Home: { screen: HomeScreen },
     },
     // Navigator Menu
     { contentComponent: NavigationMenu }
@@ -29,9 +36,9 @@ const App = createDrawerNavigator(
 
 const RootNavigator = createSwitchNavigator(
     {
-        AuthLoading: {screen: AuthLoadingScreen},
-        Auth: {screen: Auth},
-        App: {screen: App},
+        AuthLoading: { screen: AuthLoadingScreen },
+        Auth: { screen: Auth },
+        App: { screen: App },
     },
     {
         initialRouteName: 'AuthLoading',

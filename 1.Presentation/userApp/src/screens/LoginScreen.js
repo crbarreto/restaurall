@@ -21,7 +21,6 @@ import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from 'react-native-firebase'; // Import Firebase for auth
 import { Button } from 'react-native-paper';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Create a firebase Auth const
 const firebaseAuth = firebase.auth();
@@ -78,6 +77,7 @@ class LoginScreen extends React.Component<Props, State> {
     this._handleChangeUserPassword = this._handleChangeUserPassword.bind(this);
     this._handleForgotPassword = this._handleForgotPassword.bind(this);
     this._handleLogin = this._handleLogin.bind(this);
+    this.navigateToRegister = this.navigateToRegister.bind(this);
 
   }
 
@@ -172,6 +172,10 @@ class LoginScreen extends React.Component<Props, State> {
     }
   }
 
+  navigateToRegister() {
+    this.props.navigation.navigate('Register');
+  }
+
   componentDidMount() {
     // Hide SplashScreen
     SplashScreen.hide();
@@ -193,13 +197,11 @@ class LoginScreen extends React.Component<Props, State> {
     let formValid = userMailValid && userPasswordValid;
 
     return (
-      <View
-        style={styles.container}
-      >
+      <View style={styles.container}>
 
         <View style={styles.logoContainer}>
           <RegularText style={styles.titleText}>RestaurAll</RegularText>
-          <Image source={logoImage} alt="Logo Banconfio" style={styles.logoImage} />
+          <Image source={logoImage} style={styles.logoImage} />
           <RegularText style={styles.blueText}>Pedir tu comida no podría se más fácil</RegularText>
         </View>
 
@@ -218,7 +220,7 @@ class LoginScreen extends React.Component<Props, State> {
           }
 
           <TextInput
-            style={{ marginBottom: '2%' }}
+            style={{ marginBottom: '2%', backgroundColor: 'transparent' }}
             label='Correo'
             value={userMail}
             error={!this.state.userMailValid ? 'Ingrese un correo valido' : ''}
@@ -230,6 +232,7 @@ class LoginScreen extends React.Component<Props, State> {
             !userForgotPassword ?
               <Animatable.View ref={this.handleViewRef}>
                 <TextInput
+                  style={{ backgroundColor: 'transparent' }}
                   label='Contraseña'
                   error={!this.state.userPasswordValid ? 'La contraseña no puede ser tan corta' : ''}
                   value={userPassword}
@@ -283,8 +286,8 @@ class LoginScreen extends React.Component<Props, State> {
 
           <RegularText style={styles.infoText}>
             ¿ Aún no tiene una cuenta ?
-            <Text style={{ fontWeight: 'bold' }} onPress={() => Linking.openURL('https://restaurall.com')}>
-              {` INFORMACIÓN`}
+            <Text style={{ fontWeight: 'bold' }} onPress={this.navigateToRegister}>
+              {` REGISTRATE`}
             </Text>
           </RegularText>
         </View>
@@ -298,10 +301,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.mainRed,
     ...StyleSheet.absoluteFillObject
-  },
-  contentContainer: {
-    flex: 1,
-    paddingBottom: '2%',
   },
   titleText: {
     color: COLORS.main,
