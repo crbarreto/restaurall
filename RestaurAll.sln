@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "3.Applicatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting.IoC", "5.DataAccess\CrossCutting.IoC\CrossCutting.IoC.csproj", "{3427D6AD-F9DC-411C-9A75-271E79E295DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Models", "4.Domain\Domain.Models\Domain.Models.csproj", "{C64040E4-E409-47ED-9B0F-FD0A88B438CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models", "4.Domain\Domain.Models\Domain.Models.csproj", "{C64040E4-E409-47ED-9B0F-FD0A88B438CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Restaurant", "DataAccess.Restaurant\DataAccess.Restaurant.csproj", "{858A8BB0-F9EB-47E3-B563-A2B1EB5EE3A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{C64040E4-E409-47ED-9B0F-FD0A88B438CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C64040E4-E409-47ED-9B0F-FD0A88B438CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C64040E4-E409-47ED-9B0F-FD0A88B438CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858A8BB0-F9EB-47E3-B563-A2B1EB5EE3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858A8BB0-F9EB-47E3-B563-A2B1EB5EE3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858A8BB0-F9EB-47E3-B563-A2B1EB5EE3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858A8BB0-F9EB-47E3-B563-A2B1EB5EE3A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +95,7 @@ Global
 		{3539BA4E-4FCB-4249-ADB1-204261D00208} = {145B9723-A2A5-472D-8D24-B7FE3016F720}
 		{3427D6AD-F9DC-411C-9A75-271E79E295DA} = {DA59E94E-1A81-48AD-BC8E-6DD21AAFB9BB}
 		{C64040E4-E409-47ED-9B0F-FD0A88B438CD} = {5D8FB763-FB7A-4809-8E22-20334A733A84}
+		{858A8BB0-F9EB-47E3-B563-A2B1EB5EE3A9} = {DA59E94E-1A81-48AD-BC8E-6DD21AAFB9BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {256DF083-3159-4F4F-88B2-9387E1B5898C}
