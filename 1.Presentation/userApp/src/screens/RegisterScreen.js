@@ -106,6 +106,16 @@ class RegisterScreen extends React.Component<Props, State> {
                 scrollEnabled
             >
 
+                <View style={[
+                    styles.topDecorator,
+                    { right: 0 }
+                ]} />
+
+                <View style={[
+                    styles.topDecorator,
+                    { left: 0 }
+                ]} />
+
                 <View style={styles.logoContainer}>
                     <Image source={logoImage} style={styles.logoImage} />
                     <RegularText style={styles.titleText}>Registro</RegularText>
@@ -129,13 +139,6 @@ class RegisterScreen extends React.Component<Props, State> {
 
                 <TextInput
                     style={styles.defaultInput}
-                    label='Dirección'
-                    value={address}
-                    onChangeText={(value) => this._handleChangeInput('address', value)}
-                />
-
-                <TextInput
-                    style={styles.defaultInput}
                     label='Contraseña'
                     value={password}
                     secureTextEntry
@@ -152,9 +155,26 @@ class RegisterScreen extends React.Component<Props, State> {
                 />
 
                 <Button
-                    style={{ marginTop: '5%', marginBottom: '10%', fontWeigth: 'bold' }}
-                    mode="text" >
-                        Registrarme                    
+                    style={{
+                        marginTop: '5%',
+                        fontWeigth: 'bold',
+                    }}
+                    mode="contained"
+                    onPress={() => false}
+                >
+                    Registrarme
+                </Button>
+
+                <Button
+                    style={{
+                        marginTop: '5%',
+                        marginBottom: '10%',
+                        fontWeigth: 'bold',
+                    }}
+                    onPress={() => false}
+                    mode="text"
+                >
+                    Volver
                 </Button>
 
             </KeyboardAwareScrollView>
@@ -168,24 +188,23 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.mainWhite,
     },
     contentContainer: {
-        paddingHorizontal: '5%',
-        paddingVertical: '2%',
+        paddingHorizontal: '10%',
     },
     defaultInput: {
-        marginBottom: '2%',
+        marginBottom: '1%',
         backgroundColor: 'transparent'
     },
     logoContainer: {
         alignItems: 'center',
-        backgroundColor: COLORS.tertiary,
         paddingBottom: '8%',
         paddingTop: '8%',
-        width: '100%'
+        width: '100%',
+        zIndex: 3,
     },
     logoImage: {
         marginBottom: '4%',
-        height: 140,
-        width: 140,
+        height: 80,
+        width: 80,
     },
     titleText: {
         color: COLORS.main,
@@ -196,6 +215,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: '1%',
         textAlign: 'center',
+    },
+    topDecorator: {
+        height: 80,
+        backgroundColor: COLORS.main,
+        borderBottomStartRadius: 100,
+        borderBottomEndRadius: 100,
+        position: 'absolute',
+        top: 0,
+        width: '100%',
+        zIndex: 2,
     }
 });
 
