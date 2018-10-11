@@ -173,7 +173,7 @@ class LoginScreen extends React.Component<Props, State> {
   }
 
   navigateToRegister() {
-    this.props.navigation.navigate('Register');
+    this.props.navigation.push('Register');
   }
 
   componentDidMount() {

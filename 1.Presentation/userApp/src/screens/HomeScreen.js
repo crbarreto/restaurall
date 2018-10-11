@@ -60,7 +60,7 @@ export default class HomeScreen extends React.Component<Props, State> {
 
           <Searchbar
             style={{ marginHorizontal: '5%', width: '90%' }}
-            placeholder="Search"
+            placeholder="Búsqueda"
             onChangeText={query => { this.setState({ searchAddress: query }); }}
             value={searchAddress}
           />

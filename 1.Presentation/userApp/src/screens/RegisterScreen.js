@@ -55,6 +55,7 @@ class RegisterScreen extends React.Component<Props, State> {
         this._handleChangeInput = this._handleChangeInput.bind(this);
         this._validateEmail = this._validateEmail.bind(this);
         this._validatePassword = this._validatePassword.bind(this);
+        this._goBack = this._goBack.bind(this);
     }
 
     _handleChangeInput(inputReference, value) {
@@ -85,6 +86,10 @@ class RegisterScreen extends React.Component<Props, State> {
                 isPasswordValid: false,
             });
 
+    }
+
+    _goBack() {
+        this.props.navigation.goBack();
     }
 
     render() {
@@ -165,17 +170,19 @@ class RegisterScreen extends React.Component<Props, State> {
                     Registrarme
                 </Button>
 
-                <Button
+                <BoldText
                     style={{
                         marginTop: '5%',
-                        marginBottom: '10%',
-                        fontWeigth: 'bold',
+                        marginBottom: '20%',
+                        color: COLORS.main,
+                        fontSize: 16,
+                        textAlign: 'center',
+
                     }}
-                    onPress={() => false}
-                    mode="text"
+                    onPress={this._goBack}
                 >
-                    Volver
-                </Button>
+                    REGRESAR
+                </BoldText>
 
             </KeyboardAwareScrollView>
         );
