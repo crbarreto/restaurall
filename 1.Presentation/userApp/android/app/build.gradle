@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-google-places')
     implementation project(':react-native-spinkit')
     implementation project(':react-native-firebase')
     implementation project(':react-native-vector-icons')

@@ -5020,6 +5020,11 @@ react-native-firebase@^5.0.0-rc4:
     opencollective-postinstall "^2.0.0"
     prop-types "^15.6.2"
 
+react-native-google-places@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-google-places/-/react-native-google-places-2.5.2.tgz#62658034519ab0876ffebfdd1fb2f8503847c1cc"
+  integrity sha512-utJrVcZCi7LDaBrd1r6axQAfcR9pRE1NPjUr/gO95iPHT+9ktJGPDcoRuJi7HgMlTZ4eOJaFRx0PB1xFE7WF0Q==
+
 react-native-iphone-x-helper@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.1.0.tgz#3a881720900bd8d1c67de2c465ea9aa9296180a7"

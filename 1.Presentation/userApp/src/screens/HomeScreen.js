@@ -15,6 +15,7 @@ import SplashScreen from 'react-native-splash-screen';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Searchbar } from 'react-native-paper';
+import RNGooglePlaces from 'react-native-google-places';
 
 // Components
 import { BoldText, RegularText, LightText } from '../components/StyledText';
@@ -42,11 +43,25 @@ export default class HomeScreen extends React.Component<Props, State> {
     this.state = {
       searchAddress: '',
     };
+
+    this.autocompletSearchWithPlaces = this.autocompletSearchWithPlaces.bind(this);
   }
 
   componentDidMount() {
     // Hide SplashScreen
     SplashScreen.hide();
+  }
+
+  autocompletSearchWithPlaces(query: string) {
+    this.setState({ searchAddress: query });
+
+    RNGooglePlaces.getAutocompletePredictions(query)
+      .then((place) => {
+        console.log(place);
+        // place represents user's selection from the
+        // suggestions and it is a simplified Google Place object.
+      })
+      .catch(error => console.log(error.message));
   }
 
   render() {
@@ -61,7 +76,7 @@ export default class HomeScreen extends React.Component<Props, State> {
           <Searchbar
             style={{ marginHorizontal: '5%', width: '90%' }}
             placeholder="Búsqueda"
-            onChangeText={query => { this.setState({ searchAddress: query }); }}
+            onChangeText={this.autocompletSearchWithPlaces}
             value={searchAddress}
           />
 
@@ -85,7 +100,7 @@ export default class HomeScreen extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    height: height * 0.96,    
+    height: height * 0.96,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
