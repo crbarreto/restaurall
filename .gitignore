@@ -270,5 +270,6 @@ __pycache__/
 PrecompiledWeb
 
 
-# Ignore Fronted files
-*\.vscode/
+# Ignore FrontEnd files
+.vscode
+.gradle
