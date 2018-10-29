@@ -12,7 +12,7 @@ namespace RestaurAll.API.Controllers
     [HttpGet]
     public ActionResult<IEnumerable<string>> Get()
     {
-      return new string[] { "value1", "value2" };
+      return new string[] { "RestaurAll.API", "true" };
     }
 
     // GET api/values/5
@@ -24,14 +24,16 @@ namespace RestaurAll.API.Controllers
 
     // POST api/values
     [HttpPost]
-    public void Post([FromBody] string value)
+    public ActionResult<string> Post([FromBody] string value)
     {
+      return "post";
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public ActionResult<string> Put(int id, [FromBody] string value)
     {
+      return "put";
     }
 
     // DELETE api/values/5

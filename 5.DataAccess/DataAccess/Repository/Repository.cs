@@ -29,8 +29,7 @@ namespace DataAccess.Repository
         return result;
       }
       catch (Exception e)
-      {
-        result.Status = false;
+      {        
         result.Errors.Add(e.Message);
         if (e.InnerException != null)
           result.Errors.Add(e.InnerException.Message);
@@ -43,59 +42,88 @@ namespace DataAccess.Repository
       GC.SuppressFinalize(this);
     }
 
-    public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+    public async Task<OperationResult<TEntity>> Get(Expression<Func<TEntity, bool>> predicate)
     {
+      var result = new OperationResult<TEntity>();
       try
       {
-        return await _context.Collection
-                        .Find(predicate)
-                        .FirstOrDefaultAsync();
+        var data = await _context.Collection
+          .Find(predicate)
+          .FirstOrDefaultAsync();
+
+        result.Data = data;
+
+        if(data == null)
+          result.Errors.Add("Not found record");        
       }
-      catch (Exception ex)
+      catch (Exception e)
       {
-        throw ex;
+        result.Errors.Add(e.Message);
+        if (e.InnerException != null)
+          result.Errors.Add(e.InnerException.Message);
       }
+
+      return result;
     }
 
-    public async Task<IEnumerable<TEntity>> GetAll()
+    public async Task<OperationResult<IEnumerable<TEntity>>> GetAll()
     {
+      var result = new OperationResult<IEnumerable<TEntity>>();
       try
       {
-        return await _context.Collection
+        var data = await _context.Collection
                 .Find(_ => true).ToListAsync();
+
+        result.Data = data;
       }
-      catch (Exception ex)
+      catch (Exception e)
       {
-        throw ex;
+        result.Errors.Add(e.Message);
+        if (e.InnerException != null)
+          result.Errors.Add(e.InnerException.Message);
       }
+
+      return result;
     }
-    public async Task<IEnumerable<TEntity>> Query(Expression<Func<TEntity, bool>> predicate)
+    public async Task<OperationResult<IEnumerable<TEntity>>> Query(Expression<Func<TEntity, bool>> predicate)
     {
+      var result = new OperationResult<IEnumerable<TEntity>>();
       try
       {
         var query = _context.Collection.Find(predicate);
-        return await query.ToListAsync();
+        var data = await query.ToListAsync();
+
+        result.Data = data;
       }
-      catch (Exception ex)
+      catch (Exception e)
       {
-        throw ex;
+        result.Errors.Add(e.Message);
+        if (e.InnerException != null)
+          result.Errors.Add(e.InnerException.Message);
       }
+
+      return result;
     }
 
-    public async Task<OperationResult<bool>> Remove(string id)
+    public async Task<OperationResult<bool>> Remove<TKey>(TKey id)
     {
       var result = new OperationResult<bool>();
       try
       {
-        DeleteResult actionResult
+        var actionResult
             = await _context.Collection.DeleteOneAsync(
                 Builders<TEntity>.Filter.Eq("Id", id));
-        result.Status = actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
+
+        var data = actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
+        result.Data = data;
+
+        if (!data)
+          result.Errors.Add("Not is acknowledged or not is possible delete");
+
         return result;
       }
       catch (Exception e)
-      {
-        result.Status = false;
+      {        
         result.Errors.Add(e.Message);
         if (e.InnerException != null)
           result.Errors.Add(e.InnerException.Message);
@@ -108,14 +136,17 @@ namespace DataAccess.Repository
       var result = new OperationResult<long>();
       try
       {
-        DeleteResult actionResult = await _context.Collection.DeleteManyAsync(predicate);
-        result.Status = actionResult.IsAcknowledged;
+        var actionResult = await _context.Collection.DeleteManyAsync(predicate);
+        var data = actionResult.IsAcknowledged;
+
+        if (!data)
+          result.Errors.Add("Not is acknowledged");
+
         result.Data = actionResult.DeletedCount;
         return result;
       }
       catch (Exception e)
       {
-        result.Status = false;
         result.Errors.Add(e.Message);
         if (e.InnerException != null)
           result.Errors.Add(e.InnerException.Message);
@@ -123,24 +154,28 @@ namespace DataAccess.Repository
       }
     }
 
-    public async Task<OperationResult<TEntity>> Update(string id, TEntity entity)
+    public async Task<OperationResult<TEntity>> Update<TKey>(TKey id, TEntity entity)
     {
       var result = new OperationResult<TEntity>();
       try
       {
-        ReplaceOneResult actionResult
+        var actionResult
             = await _context.Collection
                             .ReplaceOneAsync(Builders<TEntity>.Filter.Eq("Id", id)
                                     , entity
                                     , new UpdateOptions { IsUpsert = true });
 
         result.Data = entity;
-        result.Status = actionResult.IsAcknowledged && actionResult.ModifiedCount > 0;
+
+        var data = actionResult.IsAcknowledged && actionResult.ModifiedCount > 0;
+
+        if (!data)
+          result.Errors.Add("Not is acknowledged or not is possible delete");
+
         return result;
       }
       catch (Exception e)
-      {
-        result.Status = false;
+      {        
         result.Errors.Add(e.Message);
         if (e.InnerException != null)
           result.Errors.Add(e.InnerException.Message);

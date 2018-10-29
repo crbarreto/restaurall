@@ -10,9 +10,7 @@ namespace Domain.Common.OperationHandling
       Errors = new List<string>();
     }
 
-    public bool Status { get; set; } = true;
-
-    public bool HasErrors => Errors.Any();
+    public bool Status => !Errors.Any();    
 
     public List<string> Errors { get; set; }
   }

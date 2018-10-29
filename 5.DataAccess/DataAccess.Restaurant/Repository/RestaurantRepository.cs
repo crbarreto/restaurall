@@ -4,7 +4,7 @@ using Domain.Repository.Restaurant;
 using Microsoft.Extensions.Options;
 using System;
 
-namespace DataAccess.Restaurant
+namespace DataAccess.Restaurant.Repository
 {
   public class RestaurantRepository : Repository<Domain.Entities.Restaurant.Restaurant>, IRestaurantRepository
   {

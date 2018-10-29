@@ -8,4 +8,8 @@
     <Folder Include="Account\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Entities\Domain.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

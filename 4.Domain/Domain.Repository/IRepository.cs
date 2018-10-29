@@ -12,16 +12,16 @@ namespace Domain.Repository
 
     void Dispose();
 
-    Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
+    Task<OperationResult<TEntity>> Get(Expression<Func<TEntity, bool>> predicate);
 
-    Task<IEnumerable<TEntity>> GetAll();
+    Task<OperationResult<IEnumerable<TEntity>>> GetAll();
 
-    Task<IEnumerable<TEntity>> Query(Expression<Func<TEntity, bool>> predicate);
+    Task<OperationResult<IEnumerable<TEntity>>> Query(Expression<Func<TEntity, bool>> predicate);
 
-    Task<OperationResult<bool>> Remove(string id);
+    Task<OperationResult<bool>> Remove<TKey>(TKey id);
 
     Task<OperationResult<long>> Remove(Expression<Func<TEntity, bool>> predicate);
 
-    Task<OperationResult<TEntity>> Update(string id, TEntity entity);
+    Task<OperationResult<TEntity>> Update<TKey>(TKey id, TEntity entity);
   }
 }

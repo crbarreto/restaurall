@@ -18,7 +18,7 @@ namespace RestaurAll.API
 {
   public class Startup
   {
-    private Container container = new Container();
+    private readonly Container _container = new Container();
 
     public Startup(IConfiguration configuration, IHostingEnvironment env)
     {
@@ -45,6 +45,8 @@ namespace RestaurAll.API
       {
         options.ForwardClientCertificate = false;
       });
+
+      services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
       #region Authentication
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -81,30 +83,30 @@ namespace RestaurAll.API
 
     private void IntegrateSimpleInjector(IServiceCollection services)
     {
-      container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+      _container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
       services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
       services.AddSingleton<IControllerActivator>(
-          new SimpleInjectorControllerActivator(container));
+          new SimpleInjectorControllerActivator(_container));
       services.AddSingleton<IViewComponentActivator>(
-          new SimpleInjectorViewComponentActivator(container));
+          new SimpleInjectorViewComponentActivator(_container));
 
-      services.EnableSimpleInjectorCrossWiring(container);
-      services.UseSimpleInjectorAspNetRequestScoping(container);
+      services.EnableSimpleInjectorCrossWiring(_container);
+      services.UseSimpleInjectorAspNetRequestScoping(_container);
     }
 
     private void InitializeContainer(IApplicationBuilder app)
     {
       // Add application presentation components:
-      container.RegisterMvcControllers(app);
-      container.RegisterMvcViewComponents(app);
+      _container.RegisterMvcControllers(app);
+      _container.RegisterMvcViewComponents(app);
 
       // Add application services. For instance:
-      container.RegisterDependenciesScoped();
+      _container.RegisterDependenciesScoped();
 
       // Allow Simple Injector to resolve services from ASP.NET Core.
-      container.AutoCrossWireAspNetComponents(app);
+      _container.AutoCrossWireAspNetComponents(app);
     }
   }
 }

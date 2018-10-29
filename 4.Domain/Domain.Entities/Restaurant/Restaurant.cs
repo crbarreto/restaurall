@@ -1,9 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Domain.Entities.Restaurant
 {
@@ -11,6 +8,9 @@ namespace Domain.Entities.Restaurant
   {
     [BsonId]
     public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+
+    [BsonElement]
+    public string Uid { get; set; }
 
     [BsonElement, Required, StringLength(120)]
     public string Name { get; set; }
