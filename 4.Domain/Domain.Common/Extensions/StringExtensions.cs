@@ -6,10 +6,10 @@ namespace Domain.Common.Extensions
   {
     public static ObjectId GetInternalId(this string id)
     {
-      ObjectId internalId;
-      if (!ObjectId.TryParse(id, out internalId))
+      if (!ObjectId.TryParse(id, out var internalId))
         internalId = ObjectId.Empty;
       return internalId;
     }
   }
 }
+

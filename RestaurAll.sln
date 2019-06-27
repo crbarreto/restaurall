@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models", "4.Domain\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Restaurant", "5.DataAccess\DataAccess.Restaurant\DataAccess.Restaurant.csproj", "{97F84161-5A04-4971-B42D-C3363FF64EEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management", "1.Presentation\Management\Management.csproj", "{BB518B60-2C33-4B16-ADB0-94615EBA021B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{97F84161-5A04-4971-B42D-C3363FF64EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97F84161-5A04-4971-B42D-C3363FF64EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97F84161-5A04-4971-B42D-C3363FF64EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB518B60-2C33-4B16-ADB0-94615EBA021B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB518B60-2C33-4B16-ADB0-94615EBA021B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB518B60-2C33-4B16-ADB0-94615EBA021B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB518B60-2C33-4B16-ADB0-94615EBA021B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{3427D6AD-F9DC-411C-9A75-271E79E295DA} = {DA59E94E-1A81-48AD-BC8E-6DD21AAFB9BB}
 		{C64040E4-E409-47ED-9B0F-FD0A88B438CD} = {5D8FB763-FB7A-4809-8E22-20334A733A84}
 		{97F84161-5A04-4971-B42D-C3363FF64EEC} = {DA59E94E-1A81-48AD-BC8E-6DD21AAFB9BB}
+		{BB518B60-2C33-4B16-ADB0-94615EBA021B} = {AC609746-B6EE-4014-A209-DB86EF18D5E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {256DF083-3159-4F4F-88B2-9387E1B5898C}
